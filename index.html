@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Ramirez Portafolio</title>
+    <style>
+        :root{ --header-height:80px; --accent:#111; }
+        html{ scroll-behavior: smooth; }
+        body{ margin:0; font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#111; }
+       
+        header{
+            position:fixed;
+            top:0; left:0; right:0;
+            height:var(--header-height);
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 32px;
+            background:#fff;
+            z-index:1000;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+        }
+        .brand{ font-weight:700; letter-spacing:0.5px; }
+        nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:24px; align-items:center; }
+        nav a{ text-decoration:none; color:var(--accent); padding:10px 4px; position:relative; }
+        nav a.active::after{ content:''; position:absolute; left:0; right:0; bottom:-14px; height:2px; background:var(--accent); margin:auto; width:24px; }
+
+        main{ margin-top:var(--header-height); }
+        section{ padding:48px 20px; min-height:60vh; box-sizing:border-box; }
+        section{ scroll-margin-top: calc(var(--header-height) + 16px); }
+
+        .hero{
+            height:80vh;
+            display:flex; align-items:flex-end; justify-content:center;
+            color:#fff; position:relative; overflow:hidden;
+            background-image: url('imagenes/imagen1.JPG');
+            background-size:cover; background-position:center center; background-repeat:no-repeat;
+        }
+        .hero .caption{ background:none; width:100%; padding:24px 40px; box-sizing:border-box; text-align:right; }
+
+        .perfil{ background:#000; color:#fff; }
+        .perfil h2, .perfil p{ color:#fff; }
+        .perfil .inner{ max-width:980px; margin:0 auto; display:grid; grid-template-columns:1fr 420px; gap:40px; align-items:center; padding:60px 20px; box-sizing:border-box; }
+        .perfil img{ width:100%; height:auto; display:block; border:6px solid rgba(255,255,255,0.06); box-shadow:0 10px 30px rgba(0,0,0,0.6); }
+
+        .reciente{ background:#fff; }
+        .anica{ background:#f7f7f7; }
+        .otras{ background:#fff; }
+        .contacto{ background:#f3f3f3; }
+
+        .disenos{ background:#fff; display:flex; align-items:center; justify-content:center; padding:100px 20px; }
+        .disenos h2{ font-size:clamp(40px,6vw,88px); letter-spacing:2px; margin:0; text-transform:uppercase; }
+
+       
+        .fotografia {
+            background:#fafafa;
+        }
+        .fotografia h2 {
+            font-size:clamp(28px,4vw,60px);
+            text-transform:uppercase;
+            margin-bottom:20px;
+        }
+
+        @media (max-width:700px){
+            header{ padding:0 16px; }
+            nav ul{ gap:12px; }
+            .hero .caption{ padding:16px; text-align:center; }
+        }
+
+        @media (max-width:880px){
+            .perfil .inner{ grid-template-columns:1fr; text-align:center; }
+            .perfil img{ max-width:320px; margin:0 auto; }
+        }
+
+        .carousel{ position:relative; max-width:1100px; margin:18px auto 60px; overflow:hidden; border-radius:6px; }
+        .carousel-track{ display:flex; transition:transform 0.6s ease; will-change:transform; }
+        .carousel-slide{ min-width:100%; box-sizing:border-box; }
+        .carousel-slide img{ width:100%; height:clamp(420px, 60vh, 760px); object-fit:cover; object-position:center 30%; display:block; }
+        .carousel-slide.slide-top img{ object-position: center 0%; }
+
+        .carousel-btn{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:#fff; border:0; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:20px; }
+        .carousel-prev{ left:12px; }
+        .carousel-next{ right:12px; }
+        .carousel-dots{ position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:8px; }
+        .carousel-dots button{ width:10px; height:10px; border-radius:50%; border:0; background:rgba(255,255,255,0.5); cursor:pointer; }
+        .carousel-dots button.active{ background:#fff; }
+
+        .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:2000; }
+        .modal{ background:#fff; color:#111; max-width:820px; width:92%; max-height:80vh; overflow:auto; padding:28px; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,0.4); position:relative; }
+        .modal .close{ position:absolute; right:18px; top:12px; background:none; border:none; font-size:18px; cursor:pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">Juan Ramirez Portafolio</div>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a class="nav-link" href="#home">Home</a></li>
+                <li><a class="nav-link" href="#perfil">Perfil</a></li>
+                <li><a class="nav-link" href="#disenos">Disenos</a></li>
+                <li><a class="nav-link" href="#aframe">Aframe</a></li>
+                <li><a class="nav-link" href="#fotografia">Fotografia</a></li>
+                <li><a class="nav-link" href="#audiovisual">Audiovisual</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="caption">
+                <h1 style="margin:0;">The Science of Sleep / Fotografia</h1>
+                <p style="margin:6px 0 0; font-size:14px;">Portfolio Fotografico</p>
+            </div>
+        </section>
+
+        <section id="perfil" class="perfil">
+            <div class="inner">
+                <div>
+                    <h2>Perfil</h2>
+                    <p>Estudiante de producción multimedia con conocimientos en Fotografía, diseño y audiovisuales.</p>
+                    <p style="margin-top:24px;"><a href="#" id="open-bio" style="color:#fff; text-decoration:underline; font-size:14px;">Seguir leyendo</a></p>
+                </div>
+                <div style="text-align:center;">
+                    <img src="imagenes/fotobio.png" alt="fotodeperfil" loading="lazy" />
+                </div>
+            </div>
+        </section>
+
+        <section id="disenos" class="disenos">
+            <h2>DISEÑOS</h2>
+            <div class="carousel" id="design-carousel" aria-roledescription="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide"><img src="imagenes/diseno1.jpg" alt="diseno1" loading="lazy"/></div>
+                    <div class="carousel-slide"><img src="imagenes/diseno2.jpg" alt="diseno2" loading="lazy"/></div>
+                    <div class="carousel-slide slide-top"><img src="imagenes/diseno3.jpg" alt="diseno3" loading="lazy"/></div>
+            
+                </div>
+                <button class="carousel-btn carousel-prev" aria-label="Anterior">‹</button>
+                <button class="carousel-btn carousel-next" aria-label="Siguiente">›</button>
+                <div class="carousel-dots" aria-hidden="false"></div>
+            </div>
+        </section>
+
+        <div id="bio-modal" class="modal-backdrop" aria-hidden="true">
+            <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bio-title">
+                <button class="close" id="close-bio" aria-label="Cerrar">✕</button>
+                <h3 id="bio-title">Biografía</h3>
+                <p>Estudiante de producción multimedia con formación en fotografía, diseño gráfico y producción audiovisual. Actualmente desarrollando proyectos personales que combinan imagen fija y video, con interés en narrativa visual y edición.</p>
+                <p>Experiencia en manejo de cámaras DSLR y mirrorless, edición en Adobe Premiere y After Effects, y diseño en Adobe Photoshop e Illustrator. Busco colaboraciones en proyectos creativos y oportunidades de aprendizaje en el ámbito audiovisual.</p>
+            </div>
+        </div>
+
+        <section id="aframe" class="aframe">
+            <div style="max-width:980px; margin:0 auto;">
+                <h2>Aframe</h2>
+                <p>Proyectos recientes, imágenes o tarjetas. Cada entrada puede anclarse a una subpágina o modal.</p>
+                <iframe src="aframe/aframe.html" style="width:100%; height:600px; border:0; border-radius:8px;"></iframe>
+            </div>
+        </section>
+
+        
+        <section id="fotografia" class="fotografia">
+            <div style="max-width:1080px; margin:0 auto;">
+                <h2>Fotografía</h2>
+                <p>Aquí puedes mostrar tu portafolio fotográfico, con una galería o enlaces a tus proyectos.</p>
+             
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin-top:24px;">
+                    <img src="imagenes/foto1.jpeg" alt="Fotografia1" style="width:100%; border-radius:8px;">
+                    <img src="imagenes/foto2.jpeg" alt="Fotografia2" style="width:100%; border-radius:8px;">
+                    <img src="imagenes/foto3.jpeg" alt="Fotografia3" style="width:100%; border-radius:8px;">
+                </div>
+            </div>
+        </section>      
+
+        <section id="audiovisual" class="Audiovisual">
+            <div style="max-width:1080px; margin:0 auto;">
+                <h2>Audiovisual</h2>
+                <p>Proyectos audiovisuales en los que he participado</p>
+
+                <video controls style="width:100%; border-radius:12px; margin-top:20px;">
+                    <source src="videos/videoutk.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        function updateHeaderHeight(){
+            var header = document.querySelector('header');
+            if(!header) return;
+            var h = header.getBoundingClientRect().height + 'px';
+            document.documentElement.style.setProperty('--header-height', h);
+        }
+        window.addEventListener('load', updateHeaderHeight);
+        window.addEventListener('resize', updateHeaderHeight);
+
+        // Activar enlace según sección visible
+        (function(){
+            var links = Array.from(document.querySelectorAll('.nav-link'));
+            var sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+            if(sections.length === 0) return;
+
+            var opts = { root: null, rootMargin: '0px', threshold: 0.5 };
+            var observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    var id = entry.target.id;
+                    var link = document.querySelector('.nav-link[href="#' + id + '"]');
+                    if(entry.isIntersecting){
+                        links.forEach(l => l.classList.remove('active'));
+                        if(link) link.classList.add('active');
+                    }
+                });
+            }, opts);
+
+            sections.forEach(s => observer.observe(s));
+        })();
+
+        // Modal biografía
+        (function(){
+            var openBtn = document.getElementById('open-bio');
+            var closeBtn = document.getElementById('close-bio');
+            var modal = document.getElementById('bio-modal');
+            if(!openBtn || !modal) return;
+
+            function openModal(){
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                modal.querySelector('.modal').focus();
+            }
+            function closeModal(){
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+                openBtn.focus();
+            }
+
+            openBtn.addEventListener('click', e => { e.preventDefault(); openModal(); });
+            if(closeBtn) closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+            document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+        })();
+
+        // Carrusel diseños
+        (function(){
+            var carousel = document.getElementById('design-carousel');
+            if(!carousel) return;
+            var track = carousel.querySelector('.carousel-track');
+            var slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+            var prev = carousel.querySelector('.carousel-prev');
+            var next = carousel.querySelector('.carousel-next');
+            var dotsContainer = carousel.querySelector('.carousel-dots');
+            var current = 0;
+            var slideCount = slides.length;
+            var interval = null;
+
+            function goTo(index){
+                current = (index + slideCount) % slideCount;
+                var x = -current * carousel.clientWidth;
+                track.style.transform = 'translateX(' + x + 'px)';
+                updateDots();
+            }
+            function nextSlide(){ goTo(current+1); }
+            function prevSlide(){ goTo(current-1); }
+
+            function createDots(){
+                for(var i=0;i<slideCount;i++){
+                    var btn = document.createElement('button');
+                    btn.dataset.index = i;
+                    btn.addEventListener('click', function(){ goTo(parseInt(this.dataset.index)); resetAutoplay(); });
+                    dotsContainer.appendChild(btn);
+                }
+            }
+            function updateDots(){
+                var dots = Array.from(dotsContainer.children);
+                dots.forEach(d => d.classList.toggle('active', parseInt(d.dataset.index) === current));
+            }
+
+            function startAutoplay(){ interval = setInterval(nextSlide, 4000); }
+            function stopAutoplay(){ if(interval) clearInterval(interval); }
+            function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+            prev.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+            next.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+
+            createDots();
+            goTo(0);
+            startAutoplay();
+            window.addEventListener('resize', () => { goTo(current); });
+        })();
+    </script>
+</body>
+</html>
